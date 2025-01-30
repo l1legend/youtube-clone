@@ -22,14 +22,14 @@ app.post("/process-video", (req, res) => {
     ffmpeg(inputFilePath)
         .outputOptions("-vf", "scale=-1:360") // 360p
         .on("end", () => {
-
+        res.status(200).send("Video processing finished successfully");
         })
         .on("error", (err) => {
             console.log(`An error occurred: ${err.message}`);
             res.status(500).send(`Internal Server Error: ${err.message}`);
         })
         .save(outputFilePath);
-    return res.status(200).send("Video processing started");
+    
 });
 
 app.listen(port, () => {
