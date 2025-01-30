@@ -9,8 +9,13 @@ app.post("/process-video", (req, res) => {
     const inputFilePath = req.body.inputFilePath;
     const outputFilePath = req.body.outputFilePath;
 
-    if (!inputFilePath || !outputFilePath) {
-        res.status(400).send ("Bad request: Missing File path");
+    if (!inputFilePath) {
+        return res.status(400).send("Bad request: inputFilePath is missing");
+    }
+
+    // Check if outputFilePath is missing
+    if (!outputFilePath) {
+        return res.status(400).send("Bad request: outputFilePath is missing");
     }
 
 });
