@@ -8,14 +8,8 @@ app.post("/process-video", (req, res) => {
   const inputFilePath = req.body.inputFilePath;
   const outputFilePath = req.body.outputFilePath;
 
-  //check if inputFilePath is missing
-  if (!inputFilePath) {
-    return res.status(400).send("Bad request: inputFilePath is missing");
-  }
-
-  // Check if outputFilePath is missing
-  if (!outputFilePath) {
-    return res.status(400).send("Bad request: outputFilePath is missing");
+  if (!inputFilePath || !outputFilePath) {
+    res.status(400).send("Bad Request: Missing file path.");
   }
 
   ffmpeg(inputFilePath)
