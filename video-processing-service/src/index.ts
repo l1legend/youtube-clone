@@ -9,6 +9,7 @@ app.post("/process-video", (req, res) => {
     const inputFilePath = req.body.inputFilePath;
     const outputFilePath = req.body.outputFilePath;
 
+    //check if inputFilePath is missing
     if (!inputFilePath) {
         return res.status(400).send("Bad request: inputFilePath is missing");
     }
@@ -17,6 +18,17 @@ app.post("/process-video", (req, res) => {
     if (!outputFilePath) {
         return res.status(400).send("Bad request: outputFilePath is missing");
     }
+
+    ffmpeg(inputFilePath
+        .outputOptions("-vf", "scale=-1:360") // 360p
+        .on("end", () => {
+
+        })
+        .on("error", (err) => {
+            console.log(`An error occurred: ${err.message}`);
+            res.status(500).send(`Internal Server Error: ${err.message}`);
+        })
+    )
 
 });
 
