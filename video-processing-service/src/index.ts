@@ -16,7 +16,7 @@ const app = express();
 app.use(express.json());
 
 // Process a video file from Cloud Storage into 360p
-app.post('/process-video', async (req: Request, res: Response): Promise<Response> => {
+app.post('/process-video', async (req: Request, res: Response): Promise<any> => {
 
   // Get the bucket and filename from the Cloud Pub/Sub message
   let data;
