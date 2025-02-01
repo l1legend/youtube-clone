@@ -13,7 +13,7 @@ import {
 setupDirectories();
 
 const app = express();
-app.use(express.json());
+app.use(express.json()); // Middleware to parse JSON request bodies
 
 // Process a video file from Cloud Storage into 360p
 app.post('/process-video', async (req: Request, res: Response): Promise<any> => {
@@ -40,7 +40,9 @@ app.post('/process-video', async (req: Request, res: Response): Promise<any> => 
   // Process the video into 360p
   try { 
     await convertVideo(inputFileName, outputFileName)
-  } catch (err) {
+  } 
+  // If processing fails, delete the raw and processed videos
+  catch (err) {
     await Promise.all([
       deleteRawVideo(inputFileName),
       deleteProcessedVideo(outputFileName)
@@ -51,6 +53,7 @@ app.post('/process-video', async (req: Request, res: Response): Promise<any> => 
   // Upload the processed video to Cloud Storage
   await uploadProcessedVideo(outputFileName);
 
+  // Delete the local raw and processed videos after upload
   await Promise.all([
     deleteRawVideo(inputFileName),
     deleteProcessedVideo(outputFileName)
@@ -59,6 +62,7 @@ app.post('/process-video', async (req: Request, res: Response): Promise<any> => 
   return res.status(200).send('Processing finished successfully');
 });
 
+// Start the server on the specified port
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);

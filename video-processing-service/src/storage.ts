@@ -5,11 +5,14 @@ import { Storage } from '@google-cloud/storage';
 import fs from 'fs';
 import ffmpeg from 'fluent-ffmpeg';
 
+// Initialize Google Cloud Storage client
 const storage = new Storage();
 
+// Define bucket names for raw and processed videos
 const rawVideoBucketName = "mintwin-raw-videos";
 const processedVideoBucketName = "mintwin-processed-video";
 
+// Define local paths for storing raw and processed videos
 const localRawVideoPath = "./raw-videos";
 const localProcessedVideoPath = "./processed-videos";
 
@@ -23,6 +26,7 @@ export function setupDirectories() {
 }
 
 /**
+ * Converts a video file from raw format to processed format.
  * @param rawVideoName - The name of the file to convert from {@link localRawVideoPath}.
  * @param processedVideoName - The name of the file to convert to {@link localProcessedVideoPath}.
  * @returns A promise that resolves when the video has been converted.
@@ -53,6 +57,7 @@ export function convertVideo(rawVideoName: string, processedVideoName: string) {
 }
 
 /**
+ * Downloads a raw video from Google Cloud Storage to the local directory.
  * @param fileName - The name of the file to download from the 
  * {@link rawVideoBucketName} bucket into the {@link localRawVideoPath} folder.
  * @returns A promise that resolves when the file has been downloaded.
@@ -68,6 +73,7 @@ export async function downloadRawVideo(fileName: string) {
 }
 
 /**
+ * Uploads a processed video from the local directory to Google Cloud Storage. 
  * @param fileName - The name of the file to upload from the 
  * {@link localProcessedVideoPath} folder into the {@link processedVideoBucketName}.
  * @returns A promise that resolves when the file has been uploaded.
@@ -86,6 +92,7 @@ export async function uploadProcessedVideo(fileName: string) {
 }
 
 /**
+ * Deletes a raw video file from the local directory.
  * @param fileName - The name of the file to delete from the
  * {@link localRawVideoPath} folder.
  * @returns A promise that resolves when the file has been deleted.
@@ -107,6 +114,7 @@ export function deleteRawVideo(fileName: string) {
   }
   
 /**
+ * Deletes a file from the local filesystem.
  * @param filePath - The path of the file to delete.
  * @returns A promise that resolves when the file has been deleted.
  */
