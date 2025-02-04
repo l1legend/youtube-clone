@@ -7,7 +7,7 @@ export default function Navbar() {
         <nav className={styles.nav}>
             <Link href="/">
                     <Image width={90} height={20}
-                        src="youtube-logo.svg" alt="YouTube Logo" />
+                    src="youtube-logo.svg" alt="YouTube Logo" />
             </Link>
         </nav>
     );
