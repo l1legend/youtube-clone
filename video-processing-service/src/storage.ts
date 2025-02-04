@@ -10,7 +10,7 @@ const storage = new Storage();
 
 // Define bucket names for raw and processed videos
 const rawVideoBucketName = "mintwin-raw-videos";
-const processedVideoBucketName = "mintwin-processed-video";
+const processedVideoBucketName = "mintwin-processed-videos";
 
 // Define local paths for storing raw and processed videos
 const localRawVideoPath = "./raw-videos";
