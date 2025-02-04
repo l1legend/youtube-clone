@@ -10,7 +10,7 @@ const storage = new Storage();
 
 // Define bucket names for raw and processed videos
 const rawVideoBucketName = "mintwin-raw-videos";
-const processedVideoBucketName = "mintwin-processed-videos";
+const processedVideoBucketName = "mintwin-processed-videos"; //bucket in google cloud is called mintwin-processed-video due to typo. The docker container contains the ts code from the typo version and is uploadeding processed videos to mintwin-processed-video. Will need to reuploaded the docker container to gc in the future with the corrected name and test it. 
 
 // Define local paths for storing raw and processed videos
 const localRawVideoPath = "./raw-videos";
